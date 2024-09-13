@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-luvaldev",
+  "version": "1.0.0",
+  "description": "Portfolio website for Luvaldev",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^2.0.0"
+  },
+  "devDependencies": {}
+}
