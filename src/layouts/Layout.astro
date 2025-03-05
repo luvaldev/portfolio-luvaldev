@@ -1,0 +1,61 @@
+---
+import Header from '../components/header/header.astro';
+import Footer from '../components/footer/footer.astro';
+// Supports weights 100-900
+import '@fontsource-variable/onest';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { description, title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <div
+      class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(138,43,226,0.3),rgba(75,0,130,0))]">
+    </div>
+    <!-- <div
+      class="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
+    </div> -->
+
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: light dark;
+  }
+  html { 
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Onest Variable', sans-serif;
+    background: #09010a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      scroll-behavior: auto;
+    }
+  }
+</style>

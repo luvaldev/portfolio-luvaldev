@@ -1,0 +1,24 @@
+---
+import Badge from '../utils/Badge.astro';
+import GithubIcon from '../icons/github.astro';
+import InstagramIcon from '../icons/instagram.astro';
+import SocialPill from '../utils/SocialPill.astro';
+---
+
+<h1 class="text-white text-5xl font-bold flex flex-row gap-x-4 pb-10">
+  Hey, soy luvaldev <Badge>Estudiante</Badge>
+</h1>
+<h2 class="text-2xl opacity-80 text-wrap">
+  Estudiante de <span class="text-purple-600"
+    >Informática y Telecomunicaciones</span
+  >. Developer en formación. Desde Chile.
+</h2>
+
+<nav class="flex gap-x-3 mt-8">
+  <SocialPill href="https://github.com/luvaldev">
+    <GithubIcon class="size-6" /> Github
+  </SocialPill>
+  <SocialPill href="https://instagram.com/lwchito">
+    <InstagramIcon class="size-6" /> Instagram
+  </SocialPill>
+</nav>

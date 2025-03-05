@@ -1,49 +1,21 @@
 ---
-import '../../public/styles.css';
+import Layout from '../layouts/Layout.astro';
+import LuvMain from '../components/luvmain/luvmain.astro';
+import Experience from '../components/experience/experience.astro';
+import SectionContainer from '../components/utils/SectionContainer.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DevPort</title>
-    <link rel="stylesheet" href="../../public/styles.css" />
-    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-  </head>
-  <body>
-    <header>
-      <a href="#" class="logo"> luvaldev</a>
-
-      <nav>
-        <a href="#" class="active"> Home</a>
-        <a href="#"> Service</a>
-        <a href="#"> Skills</a>
-        <a href="#"> Education</a>
-        <a href="#"> Contact</a>
-      </nav>
-    </header>
-
-    <section class="home">
-      <div class="home-img">
-        <img src="/rsc/main.jpg" alt="Imagen principal" />
-      </div>
-      <div class="home-content">
-        <h1>Hola! Soy <span>Luis</span></h1>
-        <h3 class="typing-text">Yo soy <span></span></h3>
-        <p>hola mucho gusto</p>
-        <div class="social-icons">
-          <a href="#"> <i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"> <i class="fa-brands fa-github"></i></a>
-          <a href="#"> <i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#"> <i class="fa-brands fa-instagram"></i></a>
-        </div>
-        <a href="#" class="btn">Hire me</a>
-      </div>
-    </section>
-  </body>
-</html>
+<Layout 
+title="Porfolio de luvaldev | Desarrollador"
+description='Estudiante de Informática y Telecomunicaciones'  
+>
+  <main>
+    <SectionContainer class="py-44 pb-25">
+      <LuvMain />
+    </SectionContainer>
+    <SectionContainer id="experiencia">
+      <h2 class="text-2xl font-semibold mb-6">Experiencia</h2>
+      <Experience />
+    </SectionContainer>
+  </main>
+</Layout>
