@@ -1,7 +1,11 @@
 ---
+//
 import esp32 from '../icons/esp32.astro';
 import flutter from '../icons/flutter.astro';
 import iot from '../icons/iot.astro';
+import GithubIcon from '../icons/github.astro';
+import SocialPill from '../utils/SocialPill.astro';
+import Proyecto from '../icons/proyecto.astro'; // Usamos tu icono
 
 const TAGS = {
   flutter: {
@@ -28,7 +32,7 @@ const PROJECTS = [
     title: 'Cercasco',
     description:
       'Sistema de alerta para ciclistas que detecta vehículos traseros con ultrasonido y emite alertas visuales (LED) y hápticas (vibración).',
-    link: '#',
+    link: 'https://github.com/luvaldev/cercasco',
     github: 'https://github.com/luvaldev/cercasco',
     image: '../../../../resources/svgl.webp',
     tags: [TAGS.esp32, TAGS.flutter, TAGS.iot],
@@ -36,7 +40,7 @@ const PROJECTS = [
   {
     title: 'Programming Study Resources',
     description:
-      'Resumenes y recursos técnicos para el aprendizaje de lenguajes de programación. Material conciso y accesible para reforzar conceptos clave y mejorar habilidades de programación, con el objetivo de apoyar el aprendizaje de la comunidad.',
+      'Resúmenes y recursos técnicos para el aprendizaje de lenguajes de programación. Material conciso y accesible para reforzar conceptos clave.',
     link: '#',
     github: 'https://github.com/luvaldev/programming-study-resources',
     image: '../../../../resources/svgl.webp',
@@ -45,36 +49,176 @@ const PROJECTS = [
   {
     title: 'Casino Management Platform',
     description:
-      'Aplicación web modular para gestión de un casino, con interfaz dinámica, autenticación de usuarios, administración de productos y consumo de una API REST.',
+      'Aplicación web modular para gestión de un casino, con interfaz dinámica, autenticación de usuarios, administración de productos y consumo de API.',
     link: '#',
     github: 'https://github.com/luvaldev/casino-management-platform',
     image: '../../../../resources/svgl.webp',
     tags: [TAGS.flutter],
   },
 ];
+
+// --- LOGICA PARA PROYECTOS INICIALES ---
+const INITIAL_PROJECT_LIMIT = 4;
+// pasamos el limite al script
+const PROJECTS_PER_CLICK = 2;
 ---
 
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  {
+    PROJECTS.map(({ title, description, tags, image, link, github }, index) => {
+      const isHidden = index >= INITIAL_PROJECT_LIMIT;
+      return (
+        <article
+          class:list={[
+            // estilos base de la tarjeta
+            'bg-neutral-900/50 border border-white/10',
+            'rounded-xl shadow-lg overflow-hidden',
+            'transition-all duration-300 ease-in-out',
+            'hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/20',
+            // logica de visibilidad
+            { hidden: isHidden }, // oculto si 'isHidden' es true
+            { 'extra-project-card': isHidden }, // clase para seleccionarlo en js
+          ]}>
+          <img
+            class="w-full h-48 object-cover object-top"
+            src={image}
+            alt={`Captura de pantalla del proyecto ${title}`}
+          />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-purple-400 mb-2">{title}</h3>
+            <p class="text-base mb-4 text-pretty text-gray-300">
+              {description}
+            </p>
+            <ul class="flex gap-2 flex-wrap mb-6">
+              {tags.map(tag => (
+                <li>
+                  <span
+                    class={`flex items-center gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}>
+                    <tag.icon class="w-4 h-4" />
+                    {tag.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <footer class="flex gap-4">
+              {github && (
+                <SocialPill href={github}>
+                  <GithubIcon class="w-4 h-4" />
+                  GitHub
+                </SocialPill>
+              )}
+              {link && link !== '#' && (
+                <SocialPill href={link}>
+                  <Proyecto class="w-4 h-4" />
+                  Ver Proyecto
+                </SocialPill>
+              )}
+            </footer>
+          </div>
+        </article>
+      );
+    })
+  }
+</div>
+
 {
-  PROJECTS.map(({ title, description, tags, image }) => (
-    <article class="mb-10">
-      <h3 class="text-2xl font-semibold text-purple-500 mb-2">{title}</h3>
-      <p class="text-lg mb-4 text-pretty">{description}</p>
-      <ul class="flex gap-x-2 flex-row mb-4">
-        {tags.map(tag => (
-          <li>
-            <span
-              class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}>
-              <tag.icon class="w-4 h-4 inline-block mr-1" />
-              {tag.name}
-            </span>
-          </li>
-        ))}
-      </ul>
-      <img
-        class="rounded shadow-2xl shadow-white/10"
-        src={image}
-        alt={`Captura de pantalla del proyecto ${image}`}
-      />
-    </article>
-  ))
+  PROJECTS.length > INITIAL_PROJECT_LIMIT && (
+    <div class="flex justify-center items-center gap-6 mt-12">
+      <button
+        id="view-less-btn"
+        class="
+          text-gray-400 font-medium py-2 px-6 rounded-full
+          hover:text-purple-300 hover:bg-purple-900/20 transition
+          hidden
+        ">
+        Ver menos
+      </button>
+
+      <button
+        id="view-more-btn"
+        class="
+          text-purple-300 font-semibold py-2 px-6
+          rounded-full border border-purple-300/50
+          bg-purple-900/30 backdrop-blur-sm
+          hover:scale-105 hover:bg-purple-900/50 transition
+        ">
+        {/* el texto se actualizará con js */}
+        Ver más
+      </button>
+    </div>
+  )
 }
+
+<script define:vars={{ PROJECTS_PER_CLICK }}>
+  // seleccionamos todos los elementos
+  const viewMoreBtn = document.getElementById('view-more-btn');
+  const viewLessBtn = document.getElementById('view-less-btn');
+  const hiddenCards = document.querySelectorAll('.extra-project-card');
+
+  // solo ejecutamos si los botones y las tarjetas existen
+  if (viewMoreBtn && viewLessBtn && hiddenCards.length > 0) {
+    let currentlyShownCount = 0; // Contador de cuántos extras hemos mostrado
+
+    // funcion para actualizar el texto del boton "Ver más"
+    function updateButtonText() {
+      const remaining = hiddenCards.length - currentlyShownCount;
+      const toShow = Math.min(remaining, PROJECTS_PER_CLICK);
+
+      if (remaining > 0) {
+        viewMoreBtn.textContent = `Ver más (${toShow})`;
+      }
+    }
+
+    // ejecutamos la funcion al cargar la pagina
+    updateButtonText();
+
+    // --- logica del boton "Ver Más" ---
+    viewMoreBtn.addEventListener('click', () => {
+      // 1. mostramos el boton "Ver Menos"
+      viewLessBtn.classList.remove('hidden');
+
+      // 2. calculamos cuantos mostrar en este clic
+      const showUntilIndex = currentlyShownCount + PROJECTS_PER_CLICK;
+
+      // 3. mostramos las tarjetas (de 2 en 2)
+      for (
+        let i = currentlyShownCount;
+        i < showUntilIndex && i < hiddenCards.length;
+        i++
+      ) {
+        hiddenCards[i].classList.remove('hidden');
+      }
+
+      // 4. actualizamos el contador
+      currentlyShownCount = showUntilIndex;
+
+      // 5. si ya no quedan mas, ocultamos el boton "Ver Más"
+      if (currentlyShownCount >= hiddenCards.length) {
+        viewMoreBtn.classList.add('hidden');
+      }
+
+      // 6. actualizamos el texto por si hay un proximo clic
+      updateButtonText();
+    });
+
+    // --- logica del boton "Ver Menos" ---
+    viewLessBtn.addEventListener('click', () => {
+      // 1. ocultamos TODAS las tarjetas extra
+      hiddenCards.forEach(card => {
+        card.classList.add('hidden');
+      });
+
+      // 2. reseteamos el contador
+      currentlyShownCount = 0;
+
+      // 3. ocultamos el boton "Ver Menos"
+      viewLessBtn.classList.add('hidden');
+
+      // 4. mostramos el boton "Ver Más"
+      viewMoreBtn.classList.remove('hidden');
+
+      // 5. actualizamos el texto del boton "Ver Más"
+      updateButtonText();
+    });
+  }
+</script>
