@@ -3,19 +3,31 @@ import Layout from '../layouts/Layout.astro';
 import LuvMain from '../components/luvmain/luvmain.astro';
 import Experience from '../components/experience/experience.astro';
 import SectionContainer from '../components/utils/SectionContainer.astro';
+import Code from '../components/icons/code.astro';
+import ExpIcon from '../components/icons/exp.astro';
+import Projects from '../components/projects/projects.astro';
 ---
 
-<Layout 
-title="Porfolio de luvaldev | Desarrollador"
-description='Estudiante de Informática y Telecomunicaciones'  
->
-  <main>
-    <SectionContainer class="py-44 pb-25">
+<Layout
+  title="Porfolio de luvaldev | Desarrollador"
+  description="Estudiante de Informática y Telecomunicaciones">
+  <main class="px-4">
+    <SectionContainer class="py-44 pb-32">
       <LuvMain />
     </SectionContainer>
     <SectionContainer id="experiencia">
-      <h2 class="text-2xl font-semibold mb-6">Experiencia</h2>
+      <h2 class="flex items-center gap-2 text-3xl font-semibold mb-6">
+        <ExpIcon class="size-7 text-purple-400" />
+        Experiencia
+      </h2>
       <Experience />
+    </SectionContainer>
+    <SectionContainer id="proyectos">
+      <h2 class="flex items-center gap-2 text-3xl font-semibold mb-6">
+        <Code class="size-7 text-purple-400" />
+        Proyectos
+      </h2>
+      <Projects />
     </SectionContainer>
   </main>
 </Layout>

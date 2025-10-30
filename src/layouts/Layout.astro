@@ -23,13 +23,10 @@ const { description, title } = Astro.props;
     <title>{title}</title>
   </head>
 
-  <body>
+  <body class="bg-neutral-950">
     <div
       class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(138,43,226,0.3),rgba(75,0,130,0))]">
     </div>
-    <!-- <div
-      class="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
-    </div> -->
 
     <Header />
     <slot />
@@ -41,7 +38,7 @@ const { description, title } = Astro.props;
   :root {
     color-scheme: light dark;
   }
-  html { 
+  html {
     scroll-behavior: smooth;
   }
 
@@ -57,5 +54,20 @@ const { description, title } = Astro.props;
     body {
       scroll-behavior: auto;
     }
+  }
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.15);
+      opacity: 0.9;
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 2.5s ease-in-out infinite;
   }
 </style>

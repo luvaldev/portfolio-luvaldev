@@ -1,24 +1,31 @@
 ---
 import Badge from '../utils/Badge.astro';
 import GithubIcon from '../icons/github.astro';
-import InstagramIcon from '../icons/instagram.astro';
 import SocialPill from '../utils/SocialPill.astro';
+import Linkedin from '../icons/linkedinIcon.astro';
+import Correo from '../icons/correo.astro';
 ---
 
-<h1 class="text-white text-5xl font-bold flex flex-row gap-x-4 pb-10">
+<h1
+  class="text-white text-3xl md:text-4xl lg:text-5xl font-bold flex flex-row gap-x-4 pb-6 lg:pb-10">
   Hey, soy luvaldev <Badge>Estudiante</Badge>
 </h1>
-<h2 class="text-2xl opacity-80 text-wrap">
-  Estudiante de <span class="text-purple-600"
-    >Informática y Telecomunicaciones</span
-  >. Developer en formación. Desde Chile.
+<h2 class="text-xl lg:text-2xl opacity-80 text-wrap max-w-[700px]">
+  Me llamo <span class="text-purple-600">Luis Valdenegro Mondaca</span>,
+  estudiante de
+  <span class="text-purple-400">Informática y Telecomunicaciones</span>.
+  Apasionado por la programación, la resolución de problemas y la innovación
+  tecnológica, con especial interés en redes y desarrollo de software.
 </h2>
 
-<nav class="flex gap-x-3 mt-8">
+<nav class="flex gap-4 mt-8 flex-wrap">
   <SocialPill href="https://github.com/luvaldev">
-    <GithubIcon class="size-6" /> Github
+    <GithubIcon class="size-4 lg:size-6" /> Github
   </SocialPill>
-  <SocialPill href="https://instagram.com/lwchito">
-    <InstagramIcon class="size-6" /> Instagram
+  <SocialPill href="https://www.linkedin.com/in/luis-valdenegrom/">
+    <Linkedin class="size-4 lg:size-6" /> Linkedin
+  </SocialPill>
+  <SocialPill href="https://www.linkedin.com/in/luis-valdenegrom/">
+    <Correo class="size-4 lg:size-6" /> luvaldev@gmail.com
   </SocialPill>
 </nav>

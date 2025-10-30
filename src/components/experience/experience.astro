@@ -3,31 +3,25 @@ import ExperienceItem from './experienceItem.astro';
 
 const EXPERIENCE = [
   {
-    date: 'February 13th, 2022',
-    title: 'Flowbite Application UI v2.0.0',
+    date: 'Actualmente ...',
+    title: 'Promotor de ventas',
     description:
-      'Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce & Marketing pages.',
-    link: '#',
-    message: 'New',
+      'Promotor y vendedor especializado en el sector de tecnología, con experiencia en atención al cliente, asesoramiento en la compra de productos electrónicos y demostraciones en punto de venta. Además, desempeño funciones técnicas, brindando soporte básico, configuración de equipos y resolución de incidencias. Enfocado en ofrecer una excelente experiencia al cliente y en alcanzar objetivos de ventas. ',
+    link: 'https://www.hites.com/',
+    message: 'Trabajo',
+    button: 'Hites',
   },
   {
-    date: 'March 13th, 2022',
-    title: 'Flowbite Application UI v2.0.1',
+    date: 'Mar. 2023 - Jul. 2023',
+    title: 'Ayudante de Programación',
     description:
-      'Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce & Marketing pages.',
-    message: 'New',
-  },
-  {
-    date: 'April 13th, 2022',
-    title: 'Flowbite Application UI v2.0.2',
-    description:
-      'Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce & Marketing pages.',
-    message: 'New',
+      'Brindé apoyo extracurricular a más de 100 estudiantes en el área de programación con C++. Durante este periodo, ayudé en la comprensión de conceptos clave como programación estructurada, manejo de memoria, estructuras de datos y principios de programación orientada a objetos. Además, colaboré en la elaboración de material práctico, resolución de dudas y corrección de actividades, contribuyendo activamente al proceso de enseñanza-aprendizaje.',
+    message: 'Educación',
   },
 ];
 ---
 
-<ol class="relative border-s border-gray-200 dark:border-gray-700">
+<ol>
   {
     EXPERIENCE.map(experience => (
       <li class="mb-10 ms-6">
