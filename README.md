@@ -1,4 +1,4 @@
-# Portafolio Personal de luvaldev
+# Portafolio Personal
 
 ¡Bienvenido al repositorio de mi portafolio personal! Soy **Luis Valdenegro Mondaca**, un estudiante de Informática y Telecomunicaciones.
 
@@ -23,7 +23,7 @@ El portafolio está estructurado en varias secciones clave accesibles desde la n
     * **Cercasco:** Sistema de alerta para ciclistas usando ESP32, Flutter e IoT.
     * **Programming Study Resources:** Resúmenes y recursos técnicos para el aprendizaje de programación.
     * **Casino Management Platform:** Aplicación web modular para la gestión de un casino.
-* **Contacto y Redes Sociales:** Enlaces directos a mis perfiles de GitHub, LinkedIn y mi correo electrónico (luvaldev@gmail.com).
+* **Contacto y Redes Sociales:** Enlaces directos a mis perfiles de GitHub, LinkedIn y mi correo electrónico (primary@luvaldev.lat).
 * **Footer:** Incluye derechos de autor y enlaces de navegación rápidos.
 
 ## 🛠️ Tecnologías Utilizadas
@@ -78,4 +78,4 @@ Puedes encontrarme en:
 
 * **GitHub:** [@luvaldev](https://github.com/luvaldev)
 * **LinkedIn:** [Luis Valdenegro Mondaca](https://www.linkedin.com/in/luis-valdenegrom/)
-* **Correo:** [luvaldev@gmail.com](mailto:luvaldev@gmail.com)
+* **Correo:** [luvaldev@gmail.com](mailto:primary@luvaldev.lat)
