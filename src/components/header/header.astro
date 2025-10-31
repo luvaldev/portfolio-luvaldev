@@ -1,25 +1,41 @@
+---
+const navItems = [
+  {
+    title: 'Inicio',
+    label: 'top',
+    url: '/#top',
+  },
+  {
+    title: 'Sobre mí',
+    label: 'sobre-mi',
+    url: '/#sobre-mi',
+  },
+  {
+    title: 'Experiencia',
+    label: 'experiencia',
+    url: '/#experiencia',
+  },
+  {
+    title: 'Proyectos',
+    label: 'proyectos',
+    url: '/#proyectos',
+  },
+  {
+    title: 'Contacto',
+    label: 'contacto',
+    url: '/#contacto',
+  },
+];
+---
+
 <header
-  class="flex justify-between items-center py-5 w-full xl:w-[1120px] mx-auto px-4 lg:px-0">
-  <a href="#top" class="z-50">
-    <img
-      class="rounded-full w-12 h-12"
-      src="/resources/profile-logo.webp"
-      alt="luvaldev photo"
-    />
+  class="relative z-40 flex justify-between items-center py-5 px-4 xl:hidden w-full xl:w-[1120px] mx-auto">
+  <a href="#top" class="relative z-50">
   </a>
 
-  <nav class="hidden lg:flex flex-row gap-x-10 opacity-80">
-    <a href="#top">Inicio</a>
-    <a href="#sobre-mi">Sobre mí</a>
-    <a href="#experiencia">Experiencia</a>
-    <a href="#proyectos">Proyectos</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
-
-  <button id="menu-btn" class="lg:hidden p-2 text-white z-50">
+  <button id="menu-btn-open" class="relative z-50 p-2 text-white">
     <svg
       id="menu-icon-open"
-      xmlns="http://www.w3.org/2000/svg"
       class="h-6 w-6"
       fill="none"
       viewBox="0 0 24 24"
@@ -30,73 +46,170 @@
         stroke-width="2"
         d="M4 6h16M4 12h16m-7 6h7"></path>
     </svg>
-    <svg
-      id="menu-icon-close"
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6 hidden"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M6 18L18 6M6 6l12 12"></path>
-    </svg>
   </button>
-
-  <div
-    id="mobile-menu"
-    class="hidden lg:hidden fixed inset-0 bg-neutral-950 z-40">
-    <nav
-      class="flex flex-col items-center justify-center h-full gap-y-8 text-2xl opacity-80">
-      <a href="#top" class="menu-link">Inicio</a>
-      <a href="#sobre-mi" class="menu-link">Sobre mí</a>
-      <a href="#experiencia" class="menu-link">Experiencia</a>
-      <a href="#proyectos" class="menu-link">Proyectos</a>
-      <a href="#contacto" class="menu-link">Contacto</a>
-    </nav>
-  </div>
 </header>
 
+<header
+  class="fixed top-0 z-30 hidden xl:flex items-center justify-center w-full mx-auto mt-2">
+  <nav
+    id="header-nav-desktop"
+    class="flex px-3 text-sm font-medium rounded-full text-gray-200 justify-center items-center">
+    {
+      navItems.map(link => (
+        <a
+          class="nav-link relative block px-3 py-2 transition hover:text-purple-400"
+          aria-label={link.label}
+          href={link.url}
+          data-label={link.label}>
+          {link.title}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-50 hidden xl:hidden
+         bg-neutral-950">
+  <div class="absolute top-5 right-4 z-50">
+    <button id="menu-btn-close" class="p-2 text-white">
+      <svg
+        class="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <nav
+    class="flex flex-col items-center justify-center h-full gap-y-8 text-2xl opacity-80">
+    <a data-label="top" href="#top" class="menu-link nav-link">Inicio</a>
+    <a data-label="sobre-mi" href="#sobre-mi" class="menu-link nav-link"
+      >Sobre mí</a
+    >
+    <a data-label="experiencia" href="#experiencia" class="menu-link nav-link"
+      >Experiencia</a
+    >
+    <a data-label="proyectos" href="#proyectos" class="menu-link nav-link"
+      >Proyectos</a
+    >
+    <a data-label="contacto" href="#contacto" class="menu-link nav-link"
+      >Contacto</a
+    >
+  </nav>
+</div>
+
 <script>
-  const menuBtn = document.getElementById('menu-btn');
+  const menuBtnOpen = document.getElementById('menu-btn-open');
+  const menuBtnClose = document.getElementById('menu-btn-close');
   const mobileMenu = document.getElementById('mobile-menu');
-  const openIcon = document.getElementById('menu-icon-open');
-  const closeIcon = document.getElementById('menu-icon-close');
   const menuLinks = document.querySelectorAll('.menu-link');
 
   function toggleMenu() {
-    // Comprueba si los elementos existen antes de manipularlos
     if (mobileMenu) {
       mobileMenu.classList.toggle('hidden');
-
-      // Bloquear/desbloquear scroll
       if (mobileMenu.classList.contains('hidden')) {
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = 'auto'; 
       } else {
         document.body.style.overflow = 'hidden';
       }
     }
-
-    if (openIcon) {
-      openIcon.classList.toggle('hidden');
-    }
-
-    if (closeIcon) {
-      closeIcon.classList.toggle('hidden');
-    }
   }
 
-  // Comprueba si el botón existe antes de añadir el listener
-  if (menuBtn) {
-    menuBtn.addEventListener('click', toggleMenu);
-  }
 
-  // No se necesita un null check para menuLinks,
-  // querySelectorAll devuelve una lista vacía si no encuentra nada,
-  // y el forEach simplemente no se ejecutará.
+  if (menuBtnOpen) menuBtnOpen.addEventListener('click', toggleMenu);
+  if (menuBtnClose) menuBtnClose.addEventListener('click', toggleMenu);
+
   menuLinks.forEach(link => {
     link.addEventListener('click', toggleMenu);
   });
+
+  document.addEventListener('astro:page-load', () => {
+    const sections = document.querySelectorAll('main section[id]');
+    const navItems = document.querySelectorAll('.nav-link'); 
+
+    if (sections.length === 0 || navItems.length === 0) return;
+
+    const heroSection = document.querySelector('main section');
+    if (heroSection && !heroSection.id) {
+      heroSection.id = 'top';
+    }
+
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id') || 'top';
+          navItems.forEach(item => {
+            if (item.getAttribute('data-label') === id) {
+              item.classList.add('text-purple-400');
+            } else {
+              item.classList.remove('text-purple-400');
+            }
+          });
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3,
+    });
+
+    if (heroSection) {
+      observer.observe(heroSection);
+    }
+    sections.forEach(section => {
+      if (section.id !== 'top') {
+        observer.observe(section);
+      }
+    });
+
+    document.addEventListener('astro:before-swap', () => {
+      observer.disconnect();
+    });
+  });
 </script>
+
+<style is:global>
+  #header-nav-desktop {
+    animation: blur-desktop linear both;
+    animation-timeline: scroll();
+    animation-range: 0 200px;
+  }
+
+  @keyframes blur-desktop {
+    from {
+      border-width: 0px;
+      background: rgba(9, 1, 10, 0);
+    }
+    to {
+      box-shadow:
+        0px 5px 50px -5px rgba(0, 0, 0, 0.1),
+        0px 0px 0 1px rgba(255, 255, 255, 0.05);
+      background: rgba(9, 1, 10, 0.3);
+      backdrop-filter: blur(20px);
+      border-width: 1px;
+      border-color: rgba(255, 255, 255, 0.1);
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-radius: 9999px;
+    }
+  }
+
+  .nav-link.text-purple-400 {
+    color: rgb(192 132 252);
+  }
+</style>

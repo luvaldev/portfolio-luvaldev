@@ -6,28 +6,40 @@ import SectionContainer from '../components/utils/SectionContainer.astro';
 import Code from '../components/icons/code.astro';
 import ExpIcon from '../components/icons/exp.astro';
 import Projects from '../components/projects/projects.astro';
+import AboutMe from '../components/about/about.astro';
+import UserIcon from '../components/icons/usericon.astro';
 ---
 
 <Layout
   title="Porfolio de luvaldev | Desarrollador"
   description="Estudiante de Informática y Telecomunicaciones">
   <main class="px-4">
-    <SectionContainer class="pt-24 pb-20 lg:pt-44 lg:pb-32">
+    <SectionContainer class="pt-24 lg:pt-44">
       <LuvMain />
     </SectionContainer>
-    <SectionContainer id="experiencia" class="pb-24">
+
+    <SectionContainer id="experiencia" class="pt-24 lg:pt-32">
       <h2 class="flex items-center gap-2 text-3xl font-semibold mb-6">
         <ExpIcon class="size-7 text-purple-400" />
         Experiencia
       </h2>
       <Experience />
     </SectionContainer>
-    <SectionContainer id="proyectos" class="pb-24">
+
+    <SectionContainer id="proyectos" class="pt-24 lg:pt-32">
       <h2 class="flex items-center gap-2 text-3xl font-semibold mb-6">
         <Code class="size-7 text-purple-400" />
         Proyectos
       </h2>
       <Projects />
+    </SectionContainer>
+
+    <SectionContainer id="sobre-mi" class="pt-24 lg:pt-32 pb-24">
+      <h2 class="flex items-center gap-2 text-3xl font-semibold mb-6">
+        <UserIcon class="size-7 text-purple-400" />
+        Sobre mí
+      </h2>
+      <AboutMe />
     </SectionContainer>
   </main>
 </Layout>

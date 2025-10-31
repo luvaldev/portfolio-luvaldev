@@ -5,7 +5,15 @@ import flutter from '../icons/flutter.astro';
 import iot from '../icons/iot.astro';
 import GithubIcon from '../icons/github.astro';
 import SocialPill from '../utils/SocialPill.astro';
-import Proyecto from '../icons/proyecto.astro'; // Usamos tu icono
+import Proyecto from '../icons/proyecto.astro';
+import node from '../icons/node.astro';
+import express from '../icons/express.astro';
+import mysql from '../icons/mysql.astro';
+import javascript from '../icons/javascript.astro';
+import jwt from '../icons/jwt.astro';
+import java from '../icons/java.astro';
+import cplusplus from '../icons/cplusplus.astro';
+import python from '../icons/python.astro';
 
 const TAGS = {
   flutter: {
@@ -25,6 +33,46 @@ const TAGS = {
       'bg-purple-200 text-purple-800 dark:bg-purple-800/30 dark:text-purple-200',
     icon: iot,
   },
+  NODE: {
+    name: 'Node.js',
+    class: 'bg-green-200 text-green-900 dark:bg-green-800/30 dark:text-green-200',
+    icon: node,
+  },
+  EXPRESS: {
+    name: 'Express.js',
+    class: 'bg-gray-200 text-gray-900 dark:bg-gray-700/50 dark:text-gray-200',
+    icon: express,
+  },
+  MYSQL: {
+    name: 'MySQL',
+    class: 'bg-blue-200 text-blue-900 dark:bg-blue-800/30 dark:text-blue-200',
+    icon: mysql,
+  },
+  JAVASCRIPT: {
+    name: 'JavaScript',
+    class: 'bg-yellow-200 text-yellow-900 dark:bg-yellow-800/30 dark:text-yellow-200',
+    icon: javascript,
+  },
+  JWT: {
+    name: 'JWT',
+    class: 'bg-pink-200 text-pink-900 dark:bg-pink-800/30 dark:text-pink-200',
+    icon: jwt,
+  },
+  JAVA: {
+    name: 'Java',
+    class: 'bg-orange-200 text-orange-900 dark:bg-orange-800/30 dark:text-orange-200',
+    icon: java,
+  },
+  CPLUSPLUS: {
+    name: 'C++',
+    class: 'bg-blue-200 text-blue-900 dark:bg-blue-800/30 dark:text-blue-200',
+    icon: cplusplus,
+  },
+  PYTHON: {
+    name: 'Python',
+    class: 'bg-yellow-200 text-yellow-900 dark:bg-yellow-800/30 dark:text-yellow-200',
+    icon: python,
+  },
 };
 
 const PROJECTS = [
@@ -37,14 +85,14 @@ const PROJECTS = [
     image: '../../../../resources/svgl.webp',
     tags: [TAGS.esp32, TAGS.flutter, TAGS.iot],
   },
-  {
+{
     title: 'Programming Study Resources',
     description:
       'Resúmenes y recursos técnicos para el aprendizaje de lenguajes de programación. Material conciso y accesible para reforzar conceptos clave.',
     link: '#',
     github: 'https://github.com/luvaldev/programming-study-resources',
-    image: '../../../../resources/svgl.webp',
-    tags: [TAGS.esp32],
+    image: '../../../../resources/programming.webp',
+    tags: [TAGS.JAVA, TAGS.CPLUSPLUS, TAGS.PYTHON],
   },
   {
     title: 'Casino Management Platform',
@@ -52,14 +100,12 @@ const PROJECTS = [
       'Aplicación web modular para gestión de un casino, con interfaz dinámica, autenticación de usuarios, administración de productos y consumo de API.',
     link: '#',
     github: 'https://github.com/luvaldev/casino-management-platform',
-    image: '../../../../resources/svgl.webp',
-    tags: [TAGS.flutter],
+    image: '../../../../resources/casino.webp',
+    tags: [TAGS.NODE, TAGS.EXPRESS, TAGS.MYSQL, TAGS.JAVASCRIPT, TAGS.JWT],
   },
 ];
 
-// --- LOGICA PARA PROYECTOS INICIALES ---
 const INITIAL_PROJECT_LIMIT = 4;
-// pasamos el limite al script
 const PROJECTS_PER_CLICK = 2;
 ---
 
@@ -70,14 +116,12 @@ const PROJECTS_PER_CLICK = 2;
       return (
         <article
           class:list={[
-            // estilos base de la tarjeta
             'bg-neutral-900/50 border border-white/10',
             'rounded-xl shadow-lg overflow-hidden',
             'transition-all duration-300 ease-in-out',
             'hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/20',
-            // logica de visibilidad
-            { hidden: isHidden }, // oculto si 'isHidden' es true
-            { 'extra-project-card': isHidden }, // clase para seleccionarlo en js
+            { hidden: isHidden },
+            { 'extra-project-card': isHidden },
           ]}>
           <img
             class="w-full h-48 object-cover object-top"
@@ -142,7 +186,7 @@ const PROJECTS_PER_CLICK = 2;
           bg-purple-900/30 backdrop-blur-sm
           hover:scale-105 hover:bg-purple-900/50 transition
         ">
-        {/* el texto se actualizará con js */}
+        {}
         Ver más
       </button>
     </div>
@@ -150,16 +194,13 @@ const PROJECTS_PER_CLICK = 2;
 }
 
 <script define:vars={{ PROJECTS_PER_CLICK }}>
-  // seleccionamos todos los elementos
   const viewMoreBtn = document.getElementById('view-more-btn');
   const viewLessBtn = document.getElementById('view-less-btn');
   const hiddenCards = document.querySelectorAll('.extra-project-card');
 
-  // solo ejecutamos si los botones y las tarjetas existen
   if (viewMoreBtn && viewLessBtn && hiddenCards.length > 0) {
-    let currentlyShownCount = 0; // Contador de cuántos extras hemos mostrado
+    let currentlyShownCount = 0; 
 
-    // funcion para actualizar el texto del boton "Ver más"
     function updateButtonText() {
       const remaining = hiddenCards.length - currentlyShownCount;
       const toShow = Math.min(remaining, PROJECTS_PER_CLICK);

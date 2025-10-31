@@ -1,0 +1,61 @@
+---
+import SocialPill from '../utils/SocialPill.astro';
+import DownloadIcon from '../icons/downloadicon.astro';
+
+const SKILLS = [
+  'C++',
+  'Java',
+  'Astro',
+  'JavaScript',
+  'Git',
+  'Redes',
+  'SQL',
+];
+---
+
+<article>
+  <p class="text-xl text-gray-300 mb-6 text-pretty">
+    Como estudiante de <span class="text-purple-400"
+      >Informática y Telecomunicaciones</span
+    > en la Universidad Diego Portales, mi enfoque principal es el <span
+      class="text-purple-400">desarrollo de software</span
+    > y la <span class="text-purple-400">infraestructura de redes</span>. No me
+    limito a aprender; busco activamente aplicar mi conocimiento para crear
+    soluciones eficientes. Me apasiona la resolución de problemas, especialmente
+    en el ámbito del desarrollo de software.
+  </p>
+
+  <p class="text-xl text-gray-300 mb-8 text-pretty">
+    Mi interés por la tecnología es integral. Fuera del código, disfruto de
+    actividades prácticas. También soy un aficionado a los videojuegos de
+    estrategia y shooters donde busco un punto de relajación.
+  </p>
+
+  <div class="mb-10">
+    <h3 class="text-2xl font-semibold text-purple-400 mb-4">Habilidades</h3>
+
+    <ul class="flex flex-wrap gap-2">
+      {
+        SKILLS.map(skill => (
+          <li
+            class="
+              bg-neutral-800/80 border border-white/10
+              text-purple-300 text-sm font-medium
+              py-1.5 px-3 rounded-lg">
+            {skill}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div>
+    <SocialPill
+      href="/CV_LuisValdenegro.pdf"
+      target="_blank"
+      download="CV_LuisValdenegro.pdf">
+      <DownloadIcon class="w-4 h-4" />
+      Descargar CV
+    </SocialPill>
+  </div>
+</article>

@@ -1,19 +1,52 @@
+---
+import GithubIcon from '../icons/github.astro';
+import LinkedinIcon from '../icons/linkedinIcon.astro';
+import CorreoIcon from '../icons/correo.astro';
+
+const currentYear = new Date().getFullYear();
+---
+
 <footer
-  class="rounded-lg shadow-sm m-4  backdrop-blur-lg py-5 w-full xl:w-[1120px] mx-auto mb-10">
+  class="w-full xl:w-[1120px] mx-auto mb-10
+         rounded-lg shadow-sm m-4  backdrop-blur-lg">
   <div
-    class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-    <span class="text-sm sm:text-center text-white/90"
-      >© 2025 <a href="https://github.com/luvaldev" class="hover:underline"
-        >luvaldev</a
-      >. Casi todos los derechos reservados.
+    class="w-full mx-auto max-w-screen-xl p-4
+           flex flex-col md:flex-row items-center justify-between gap-4">
+    <span class="text-sm text-white/70 text-center md:text-left">
+      © {currentYear}
+      <a
+        href="https://github.com/luvaldev"
+        class="hover:underline hover:text-purple-400">luvaldev</a
+      >. Construido con Astro y Tailwind CSS.
     </span>
-    <ul
-      class="flex flex-wrap items-center mt-3 text-sm font-medium text-white/90 sm:mt-0">
+
+    <ul class="flex flex-wrap items-center justify-center gap-6">
       <li>
-        <a href="#sobre-mi" class="hover:underline me-4 md:me-6">Sobre mi</a>
+        <a
+          href="https://github.com/luvaldev"
+          class="text-white/90 hover:text-purple-400 transition"
+          target="_blank"
+          aria-label="GitHub">
+          <GithubIcon class="size-6" />
+        </a>
       </li>
       <li>
-        <a href="#contacto" class="hover:underline">Contacto</a>
+        <a
+          href="https://www.linkedin.com/in/luis-valdenegrom/"
+          class="text-white/90 hover:text-purple-400 transition"
+          target="_blank"
+          aria-label="LinkedIn">
+          <LinkedinIcon class="size-6" />
+        </a>
+      </li>
+      <li>
+        <a
+          href="mailto:primary@luvaldev.lat"
+          class="text-white/90 hover:text-purple-400 transition"
+          target="_blank"
+          aria-label="Correo Electrónico">
+          <CorreoIcon class="size-6" />
+        </a>
       </li>
     </ul>
   </div>
