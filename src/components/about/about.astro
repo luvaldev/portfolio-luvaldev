@@ -1,16 +1,7 @@
 ---
 import SocialPill from '../utils/SocialPill.astro';
 import DownloadIcon from '../icons/downloadicon.astro';
-
-const SKILLS = [
-  'C++',
-  'Java',
-  'Astro',
-  'JavaScript',
-  'Git',
-  'Redes',
-  'SQL',
-];
+import FacescapeDemo from './FacescapeDemo.tsx';
 ---
 
 <article>
@@ -34,19 +25,7 @@ const SKILLS = [
   <div class="mb-10">
     <h3 class="text-2xl font-semibold text-purple-400 mb-4">Habilidades</h3>
 
-    <ul class="flex flex-wrap gap-2">
-      {
-        SKILLS.map(skill => (
-          <li
-            class="
-              bg-neutral-800/80 border border-white/10
-              text-purple-300 text-sm font-medium
-              py-1.5 px-3 rounded-lg">
-            {skill}
-          </li>
-        ))
-      }
-    </ul>
+    <FacescapeDemo client:visible />
   </div>
 
   <div>
