@@ -1,5 +1,4 @@
 ---
-//
 import esp32 from '../icons/esp32.astro';
 import flutter from '../icons/flutter.astro';
 import iot from '../icons/iot.astro';
@@ -193,13 +192,19 @@ const PROJECTS_PER_CLICK = 2;
   )
 }
 
-<script define:vars={{ PROJECTS_PER_CLICK }}>
+<div id="projects-data" data-projects-per-click={PROJECTS_PER_CLICK} hidden></div>
+
+<script is:inline>
+  // Leer la variable desde el dataset del elemento
+  const projectsData = document.getElementById('projects-data');
+  const PROJECTS_PER_CLICK = parseInt(projectsData.dataset.projectsPerClick, 10);
+
   const viewMoreBtn = document.getElementById('view-more-btn');
   const viewLessBtn = document.getElementById('view-less-btn');
   const hiddenCards = document.querySelectorAll('.extra-project-card');
 
   if (viewMoreBtn && viewLessBtn && hiddenCards.length > 0) {
-    let currentlyShownCount = 0; 
+    let currentlyShownCount = 0;
 
     function updateButtonText() {
       const remaining = hiddenCards.length - currentlyShownCount;
