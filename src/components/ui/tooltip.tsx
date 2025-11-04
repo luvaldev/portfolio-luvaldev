@@ -1,7 +1,7 @@
-import * as React from "react"
-import * as TooltipPrimitive from "@radix-ui/react-tooltip"
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+import * as React from 'react';
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 function TooltipProvider({
   delayDuration = 0,
@@ -13,7 +13,7 @@ function TooltipProvider({
       delayDuration={delayDuration}
       {...props}
     />
-  )
+  );
 }
 
 function Tooltip({
@@ -23,13 +23,13 @@ function Tooltip({
     <TooltipProvider>
       <TooltipPrimitive.Root data-slot="tooltip" {...props} />
     </TooltipProvider>
-  )
+  );
 }
 
 function TooltipTrigger({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
-  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
+  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
 function TooltipContent({
@@ -45,70 +45,73 @@ function TooltipContent({
         sideOffset={sideOffset}
         className="z-50"
         {...props}
-        asChild
-      >
+        asChild>
         <motion.div
           initial={{
             opacity: 0,
             scale: 0.3,
-            y: 20
+            y: 20,
           }}
           animate={{
             opacity: 1,
             scale: 1,
             y: 0,
-            x: [0, -4, 4, -3, 3, -2, 2, -1, 1, 0]
+            x: [0, -4, 4, -3, 3, -2, 2, -1, 1, 0],
           }}
+          // CORRECCIÓN DE ERROR ts(2353):
+          // Las transiciones de 'exit' se definen DENTRO del prop 'exit'
           exit={{
             opacity: 0,
             scale: 0.8,
             y: 10,
-            x: [0, -3, 3, -2, 2, -1, 1, 0]
+            x: [0, -3, 3, -2, 2, -1, 1, 0],
+            transition: {
+              // <-- La transición de 'exit' va aquí
+              opacity: { duration: 0.25 },
+              scale: { duration: 0.25, ease: 'easeIn' },
+              y: { duration: 0.25, ease: 'easeIn' },
+              x: {
+                duration: 0.4,
+                ease: 'easeOut',
+                times: [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 1],
+              },
+            },
           }}
+          // El prop 'transition' principal es solo para 'animate'
           transition={{
             opacity: { duration: 0.2 },
-            scale: { 
+            scale: {
               duration: 0.6,
-              type: "spring",
+              type: 'spring',
               damping: 12,
               stiffness: 400,
-              mass: 0.8
+              mass: 0.8,
             },
-            y: { 
+            y: {
               duration: 0.5,
-              type: "spring",
+              type: 'spring',
               damping: 10,
               stiffness: 300,
-              mass: 0.9
+              mass: 0.9,
             },
-            x: { 
+            x: {
               duration: 0.7,
               delay: 0.2,
-              ease: "easeOut",
-              times: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1]
+              ease: 'easeOut',
+              times: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1],
             },
-            exit: {
-              opacity: { duration: 0.25 },
-              scale: { duration: 0.25, ease: "easeIn" },
-              y: { duration: 0.25, ease: "easeIn" },
-              x: { 
-                duration: 0.4,
-                ease: "easeOut",
-                times: [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 1]
-              }
-            }
+            // La clave 'exit: { ... }' se ha eliminado de aquí
           }}
           className={cn(
-            "bg-primary text-primary-foreground w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balance",
-            className
-          )}
-        >
+            'bg-primary text-primary-foreground w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balance',
+            className,
+          )}>
           {children}
           <TooltipPrimitive.Arrow className="bg-primary fill-primary z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
         </motion.div>
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
-  )
+  );
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
