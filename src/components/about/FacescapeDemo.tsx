@@ -88,12 +88,6 @@ export default function FacescapeDemo() {
       name: 'Docker',
     },
     {
-      src: 'https://cdn.simpleicons.org/archlinux/1793D1',
-      alt: 'Linux (Arch)',
-      fallback: 'Ar',
-      name: 'Linux (Arch)',
-    },
-    {
       src: 'https://cdn.simpleicons.org/wireshark/1679A7',
       alt: 'Wireshark',
       fallback: 'Ws',
