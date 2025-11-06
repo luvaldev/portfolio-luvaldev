@@ -23,15 +23,14 @@ const navItems = [
   {
     title: 'Contacto',
     label: 'contacto',
-    url: '/#contacto',
+    url: 'mailto:primary@luvaldev.lat',
   },
 ];
 ---
 
 <header
   class="relative z-40 flex justify-between items-center py-5 px-4 xl:hidden w-full xl:w-[1120px] mx-auto">
-  <a href="#top" class="relative z-50">
-  </a>
+  <a href="#top" class="relative z-50"> </a>
 
   <button id="menu-btn-open" class="relative z-50 p-2 text-white">
     <svg
@@ -100,116 +99,115 @@ const navItems = [
     <a data-label="proyectos" href="#proyectos" class="menu-link nav-link"
       >Proyectos</a
     >
-    <a data-label="contacto" href="#contacto" class="menu-link nav-link"
+    <a data-label="contacto" href="/#contacto" class="menu-link nav-link"
       >Contacto</a
     >
   </nav>
-</div>
 
-<script>
-  const menuBtnOpen = document.getElementById('menu-btn-open');
-  const menuBtnClose = document.getElementById('menu-btn-close');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuLinks = document.querySelectorAll('.menu-link');
+  <script>
+    const menuBtnOpen = document.getElementById('menu-btn-open');
+    const menuBtnClose = document.getElementById('menu-btn-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuLinks = document.querySelectorAll('.menu-link');
 
-  function toggleMenu() {
-    if (mobileMenu) {
-      mobileMenu.classList.toggle('hidden');
-      if (mobileMenu.classList.contains('hidden')) {
-        document.body.style.overflow = 'auto'; 
-      } else {
-        document.body.style.overflow = 'hidden';
+    function toggleMenu() {
+      if (mobileMenu) {
+        mobileMenu.classList.toggle('hidden');
+        if (mobileMenu.classList.contains('hidden')) {
+          document.body.style.overflow = 'auto';
+        } else {
+          document.body.style.overflow = 'hidden';
+        }
       }
     }
-  }
 
+    if (menuBtnOpen) menuBtnOpen.addEventListener('click', toggleMenu);
+    if (menuBtnClose) menuBtnClose.addEventListener('click', toggleMenu);
 
-  if (menuBtnOpen) menuBtnOpen.addEventListener('click', toggleMenu);
-  if (menuBtnClose) menuBtnClose.addEventListener('click', toggleMenu);
+    menuLinks.forEach(link => {
+      link.addEventListener('click', toggleMenu);
+    });
 
-  menuLinks.forEach(link => {
-    link.addEventListener('click', toggleMenu);
-  });
+    document.addEventListener('astro:page-load', () => {
+      const sections = document.querySelectorAll('main section[id]');
+      const navItems = document.querySelectorAll('.nav-link');
 
-  document.addEventListener('astro:page-load', () => {
-    const sections = document.querySelectorAll('main section[id]');
-    const navItems = document.querySelectorAll('.nav-link'); 
+      if (sections.length === 0 || navItems.length === 0) return;
 
-    if (sections.length === 0 || navItems.length === 0) return;
+      const heroSection = document.querySelector('main section');
+      if (heroSection && !heroSection.id) {
+        heroSection.id = 'top';
+      }
 
-    const heroSection = document.querySelector('main section');
-    if (heroSection && !heroSection.id) {
-      heroSection.id = 'top';
-    }
+      const callback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id') || 'top';
+            navItems.forEach(item => {
+              if (item.getAttribute('data-label') === id) {
+                item.classList.add('text-purple-400');
+              } else {
+                item.classList.remove('text-purple-400');
+              }
+            });
+          }
+        });
+      };
 
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id') || 'top';
-          navItems.forEach(item => {
-            if (item.getAttribute('data-label') === id) {
-              item.classList.add('text-purple-400');
-            } else {
-              item.classList.remove('text-purple-400');
-            }
-          });
+      const observer = new IntersectionObserver(callback, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3,
+      });
+
+      if (heroSection) {
+        observer.observe(heroSection);
+      }
+      sections.forEach(section => {
+        if (section.id !== 'top') {
+          observer.observe(section);
         }
       });
-    };
 
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.3,
+      document.addEventListener('astro:before-swap', () => {
+        observer.disconnect();
+      });
     });
+  </script>
 
-    if (heroSection) {
-      observer.observe(heroSection);
+  <style is:global>
+    #header-nav-desktop {
+      animation: blur-desktop linear both;
+      animation-timeline: scroll();
+      animation-range: 0 200px;
     }
-    sections.forEach(section => {
-      if (section.id !== 'top') {
-        observer.observe(section);
+
+    @keyframes blur-desktop {
+      from {
+        border-width: 0px;
+        background: rgba(9, 1, 10, 0);
       }
-    });
-
-    document.addEventListener('astro:before-swap', () => {
-      observer.disconnect();
-    });
-  });
-</script>
-
-<style is:global>
-  #header-nav-desktop {
-    animation: blur-desktop linear both;
-    animation-timeline: scroll();
-    animation-range: 0 200px;
-  }
-
-  @keyframes blur-desktop {
-    from {
-      border-width: 0px;
-      background: rgba(9, 1, 10, 0);
+      to {
+        box-shadow:
+          0px 5px 50px -5px rgba(0, 0, 0, 0.1),
+          0px 0px 0 1px rgba(255, 255, 255, 0.05);
+        background: rgba(9, 1, 10, 0.3);
+        backdrop-filter: blur(20px);
+        border-width: 1px;
+        border-color: rgba(255, 255, 255, 0.1);
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-radius: 9999px;
+      }
     }
-    to {
-      box-shadow:
-        0px 5px 50px -5px rgba(0, 0, 0, 0.1),
-        0px 0px 0 1px rgba(255, 255, 255, 0.05);
-      background: rgba(9, 1, 10, 0.3);
-      backdrop-filter: blur(20px);
-      border-width: 1px;
-      border-color: rgba(255, 255, 255, 0.1);
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      border-radius: 9999px;
-    }
-  }
 
-  .nav-link.text-purple-400 {
-    color: rgb(192 132 252);
-  }
-</style>
+    .nav-link.text-purple-400 {
+      color: rgb(192 132 252);
+    }
+  </style>
+</div>
