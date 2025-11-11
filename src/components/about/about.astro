@@ -1,11 +1,9 @@
 ---
-import SocialPill from '../utils/SocialPill.astro';
-import DownloadIcon from '../icons/downloadicon.astro';
 import FacescapeDemo from './FacescapeDemo.tsx';
 ---
 
 <article>
-  <p class="text-xl text-gray-300 mb-6 text-pretty">
+  <p class="text-xl lg:text-2xl text-gray-300 mb-6 text-pretty">
     Como estudiante de <span class="text-purple-400"
       >Informática y Telecomunicaciones</span
     > en la Universidad Diego Portales, mi enfoque principal es el <span
@@ -16,25 +14,15 @@ import FacescapeDemo from './FacescapeDemo.tsx';
     en el ámbito del desarrollo de software.
   </p>
 
-  <p class="text-xl text-gray-300 mb-8 text-pretty">
+  <p class="text-xl lg:text-2xl text-gray-300 mb-8 text-pretty">
     Mi interés por la tecnología es integral. Fuera del código, disfruto de
     actividades prácticas. También soy un aficionado a los videojuegos de
     estrategia y shooters donde busco un punto de relajación.
   </p>
 
   <div class="mb-10">
-    <h3 class="text-2xl font-semibold text-purple-400 mb-4">Habilidades</h3>
+    <h3 class="text-2xl font-semibold mb-4">Habilidades</h3>
 
     <FacescapeDemo client:visible />
-  </div>
-
-  <div>
-    <SocialPill
-      href="/CV_LuisValdenegro.pdf"
-      target="_blank"
-      download="CV_LuisValdenegro.pdf">
-      <DownloadIcon class="w-4 h-4" />
-      Descargar CV
-    </SocialPill>
   </div>
 </article>

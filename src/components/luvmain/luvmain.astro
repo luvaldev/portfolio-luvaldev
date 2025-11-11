@@ -4,12 +4,24 @@ import GithubIcon from '../icons/github.astro';
 import SocialPill from '../utils/SocialPill.astro';
 import Linkedin from '../icons/linkedinIcon.astro';
 import Correo from '../icons/correo.astro';
+import FileIcon from '../icons/file.astro';
+
+import { CursorHighlight } from '@/components/ui/cursor-highlight';
 ---
 
-<h1
-  class="text-white text-3xl md:text-4xl lg:text-5xl font-bold flex flex-row gap-x-4 pb-6 lg:pb-10">
-  Hey, soy luvaldev <Badge>Estudiante</Badge>
-</h1>
+<div class="flex flex-row items-center gap-x-4 pb-6 lg:pb-10">
+  <CursorHighlight
+    client:visible
+    className="text-white text-3xl md:text-4xl lg:text-5xl font-bold"
+    gradient="from-purple-500 via-fuchsia-500 to-purple-500"
+    showPointer={true}
+    pointerClassName="text-fuchsia-500 -translate-y-5 translate-x-2"
+    rectangle="dark:border-white/20 rounded-lg">
+    <h1>Hey, soy luvaldev</h1>
+  </CursorHighlight>
+  <Badge>Estudiante</Badge>
+</div>
+
 <h2 class="text-xl lg:text-2xl opacity-80 text-wrap max-w-[700px]">
   Me llamo <span class="text-purple-600">Luis Valdenegro Mondaca</span>,
   estudiante de
@@ -19,6 +31,13 @@ import Correo from '../icons/correo.astro';
 </h2>
 
 <nav class="flex gap-4 mt-8 flex-wrap">
+  <SocialPill
+    href="/CV_LuisValdenegro.pdf"
+    target="_blank"
+    download="CV_LuisValdenegro.pdf">
+    <FileIcon class="size-4 lg:size-6" />
+    Curriculum
+  </SocialPill>
   <SocialPill href="https://github.com/luvaldev">
     <GithubIcon class="size-4 lg:size-6" /> Github
   </SocialPill>
